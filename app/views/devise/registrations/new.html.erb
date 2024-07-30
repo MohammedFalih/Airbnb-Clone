@@ -24,7 +24,6 @@
             <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %>
           <%= f.password_field :password, autocomplete: "new-password", class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" %>
-          <%= link_to "Forgot your password?", new_password_path(resource_name) %>
           <%= f.label :password_confirmation, class:"block text-sm font-medium leading-6 text-gray-900 mt-3"  %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password",  class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" %>
         </div>
