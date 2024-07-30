@@ -55,3 +55,5 @@ gem "net-pop", "~> 0.1.0"
 gem "tailwindcss-rails", "~> 2.6"
 
 gem "foreman", "~> 0.88.1"
+
+gem "devise", "~> 4.9"
