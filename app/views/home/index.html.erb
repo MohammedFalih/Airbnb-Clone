@@ -1,7 +1,7 @@
 <div class="bg-white">
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-1">
     <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-      <% 10.times do %>
+      <% @properties.each do |property| %>
         <div class="group relative">
           <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-xl bg-gray-200 group-hover:opacity-75 ">
             <img src="https://th.bing.com/th/id/OIP.4tcTs1qGhW7JsgdFeDI_eQHaEX?rs=1&pid=ImgDetMain" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
@@ -12,7 +12,7 @@
                 <h3 class="text-md font-bold text-black-700">
                   <a href="#">
                     <span aria-hidden="true" class="absolute inset-0"></span>
-                    Chennai, India
+                    <%= "#{property.city }, #{property.country }" %>
                   </a>
                 </h3>
                 <p class="flex items-center justify-between w-14 px-2  text-sm font-medium text-gray-900">
