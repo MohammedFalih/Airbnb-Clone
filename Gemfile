@@ -57,3 +57,7 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "foreman", "~> 0.88.1"
 
 gem "devise", "~> 4.9"
+
+gem "faker", "~> 3.4"
+
+gem "money-rails", "~> 1.15"

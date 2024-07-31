@@ -95,6 +95,8 @@ GEM
       warden (~> 1.2.3)
     drb (2.2.1)
     erubi (1.13.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     foreman (0.88.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -125,6 +127,15 @@ GEM
     marcel (1.0.4)
     mini_mime (1.1.5)
     minitest (5.24.1)
+    monetize (1.13.0)
+      money (~> 6.12)
+    money (6.19.0)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.15.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9)
+      money (~> 6.13)
+      railties (>= 3.0)
     msgpack (1.7.2)
     net-imap (0.4.14)
       date
@@ -297,9 +308,11 @@ DEPENDENCIES
   brakeman
   debug
   devise (~> 4.9)
+  faker (~> 3.4)
   foreman (~> 0.88.1)
   importmap-rails
   jbuilder
+  money-rails (~> 1.15)
   net-pop (~> 0.1.0)
   pg (~> 1.1)
   puma (>= 5.0)
