@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+/* app/assets/stylesheets/application.css */
+
+/* Custom styles for Swiper */
+.swiper {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
+    display: block !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    display: none !important;
+    width: 28px !important;
+    height: 28px !important;
+    background-color: white;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>') !important;
+    border-radius: 50%;
+    border-width: 4px;
+    border-color: white;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    content: '' !important;
+}
