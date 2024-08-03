@@ -1,3 +1,8 @@
+user = User.create!({
+  email: "test1@gmail.com",
+  password: "123456",
+})
+
 6.times do |i|
   property = Property.create!({
     name: Faker::Lorem.unique.sentence(word_count: 3),
@@ -8,12 +13,24 @@
     city: Faker::Address.city,
     state: Faker::Address.state,
     country: Faker::Address.country,
-    price: Money.from_amount((80..100).to_a.sample, "USD", locale: :en)
+    price: Money.from_amount((80..100).to_a.sample, "USD", locale: :en),
 
   })
 
   property.images.attach(io: File.open("db/images/property_#{i + 1}.png"), filename: property.name)
   property.images.attach(io: File.open("db/images/property_#{i + 7}.png"), filename: property.name)
-end
 
-# price: Money.from_amount((80..100).to_a.sample, "USD"),
+  ((5..10).to_a.sample).times do
+    Review.create!({
+      content: Faker::Lorem.paragraph(sentence_count: 10),
+      cleanliness_rating: (1..5).to_a.sample,
+      accuracy_rating: (1..5).to_a.sample,
+      check_in_rating: (1..5).to_a.sample,
+      communication_rating: (1..5).to_a.sample,
+      location_rating: (1..5).to_a.sample,
+      value_rating: (1..5).to_a.sample,
+      property: property,
+      user: user
+    })
+  end
+end
