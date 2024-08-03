@@ -1,6 +1,6 @@
 user = User.create!({
   email: "test1@gmail.com",
-  password: "123456",
+  password: "123456"
 })
 
 6.times do |i|
@@ -13,7 +13,7 @@ user = User.create!({
     city: Faker::Address.city,
     state: Faker::Address.state,
     country: Faker::Address.country,
-    price: Money.from_amount((80..100).to_a.sample, "USD", locale: :en),
+    price: Money.from_amount((80..100).to_a.sample, "USD", locale: :en)
 
   })
 

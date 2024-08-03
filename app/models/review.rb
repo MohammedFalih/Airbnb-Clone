@@ -10,7 +10,7 @@ class Review < ApplicationRecord
   validates :location_rating, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :value_rating, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
 
-  after_commit :set_final_rating, on: [:create, :update]
+  after_commit :set_final_rating, on: [ :create, :update ]
 
   def set_final_rating
     total_ratings = cleanliness_rating + accuracy_rating + check_in_rating + communication_rating + location_rating + value_rating
