@@ -323,7 +323,7 @@ DEPENDENCIES
   devise (~> 4.9)
   faker (~> 3.4)
   foreman (~> 0.88.1)
-  image_processing (~> 1.13)
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   money-rails (~> 1.15)
