@@ -18,7 +18,7 @@ module Api
 
       respond_to do |format|
         format.json do
-          render status: 204
+          render json: { message: 'Wishlist item successfully deleted' }, status: :ok
         end
       end
     end
@@ -26,7 +26,7 @@ module Api
     private
 
     def wishlist_params
-      params.permit(:user_id, :property_id)
+      params.require(:wishlist).permit(:property_id, :user_id)
     end
   end
 end
