@@ -1,73 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Airbnb | Holiday rentals, cabins, beach houses & more" %></title>
+    <title>Airbnb | Holiday rentals, cabins, beach houses and more</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= favicon_link_tag 'favicon.ico' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield :head %>
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <style>
-      .swiper {
-          width: 100%;
-          aspect-ratio: 1/1;
-      }
-
-      .swiper:hover .swiper-button-next,
-      .swiper:hover .swiper-button-prev {
-          display: block !important;
-      }
-
-      .swiper-button-next,
-      .swiper-button-prev {
-          display: none !important;
-          width: 28px !important;
-          height: 28px !important;
-          background-color: white;
-          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>') !important;
-          border-radius: 50%;
-          border-width: 4px;
-          border-color: white;
-          box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          -webkit-box-sizing: border-box;
-      }
-
-      .swiper-button-next::after,
-      .swiper-button-prev::after {
-          content: '' !important;
-      }
-    </style>
-  </head>
-  <body>
-    <% if controller_name != 'registrations' && controller_name != 'sessions' %>
-      <%= render 'layouts/navbar' %>
-    <% end %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-    <script type="module">
-      import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
-
-      document.addEventListener('turbo:load', () => {
-        const swiper = new Swiper('.swiper', {
-          loop: true,
-
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        });
-      });
-    </script>
-  </body>
-</html>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    >
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    </head>
+    <body>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <% if controller_name != 'registrations' && controller_name != 'sessions' %>
+        <%= render 'layouts/navbar' %>
+      <% end %>
+      <%= yield %>
+    </body>
+  </html>
