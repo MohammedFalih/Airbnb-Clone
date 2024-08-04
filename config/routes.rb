@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :api do
-    resources :wishlists, only: [:create, :destroy]
+    resources :wishlists, only: [ :create, :destroy ]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

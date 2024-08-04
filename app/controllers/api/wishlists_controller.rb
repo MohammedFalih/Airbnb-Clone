@@ -16,11 +16,7 @@ module Api
       wishlist = Wishlist.find(params[:id])
       wishlist.destroy
 
-      respond_to do |format|
-        format.json do
-          render json: { message: 'Wishlist item successfully deleted' }, status: :ok
-        end
-      end
+      render json: { message: "Wishlist item successfully deleted" }, status: :ok
     end
 
     private
