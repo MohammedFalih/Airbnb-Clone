@@ -1,7 +1,5 @@
-user = User.create!({
-  email: "test1@gmail.com",
-  password: "123456"
-})
+require "faker"
+require "open-uri"
 
 description = <<-DESCRIPTION
 <div>Explore the nature and art oasis at our unique property. The living room, a cozy masterpiece, and the fully equipped kitchen are ideal for cooking and entertaining. Step outside to our garden patio, unwind, and enjoy morning birdsong. Tastefully decorated bedrooms, a powder room, and utility area complete the experience.<br />Note: The property is surrounded by a residential area. Despite initial surroundings, I am sure that, stepping in will fill your mood with joy and happiness.
@@ -11,6 +9,39 @@ description = <<-DESCRIPTION
 <h4 class="font-medium" tabindex="-1">Guest Policy</h4>
 <p>Entire Property is yours!! Wish you fun and happy stay!!</p>
 DESCRIPTION
+
+pictures = []
+20.times do
+  pictures << URI.open(Faker::LoremFlickr.image)
+end
+
+user = User.create!({
+  email: "test1@gmail.com",
+  password: "123456",
+  name: Faker::Lorem.unique.sentence(word_count: 3),
+  address_1: Faker::Address.street_address,
+  address_2: Faker::Address.street_name,
+  city: Faker::Address.city,
+  state: Faker::Address.state,
+  country: Faker::Address.country
+})
+
+user.picture.attach(io: pictures[0], filename: user.name)
+
+19.times do |i|
+  random_user = User.create!({
+    email: "test#{i + 2}@gmail.com",
+    password: "123456",
+    name: Faker::Lorem.unique.sentence(word_count: 3),
+    address_1: Faker::Address.street_address,
+    address_2: Faker::Address.street_name,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: Faker::Address.country
+  })
+
+  random_user.picture.attach(io: pictures[i + 1], filename: random_user.name)
+end
 
 6.times do |i|
   property = Property.create!({
@@ -22,20 +53,20 @@ DESCRIPTION
     city: Faker::Address.city,
     state: Faker::Address.state,
     country: Faker::Address.country,
-    price: Money.from_amount((80..100).to_a.sample, "USD", locale: :en),
-    bedroom_count: (1..5).to_a.sample,
-    bed_count: (2..6).to_a.sample,
-    guest_count: (4..14).to_a.sample,
+    price: Money.from_amount((50..100).to_a.sample, "USD"),
+    bedroom_count: (2..5).to_a.sample,
+    bed_count: (4..10).to_a.sample,
+    guest_count: (4..20).to_a.sample,
     bathroom_count: (1..4).to_a.sample
   })
 
-  property.images.attach(io: File.open("db/images/property_#{i + 1}.png"), filename: property.name)
-  property.images.attach(io: File.open("db/images/property_7.png"), filename: property.name)
-  property.images.attach(io: File.open("db/images/property_8.png"), filename: property.name)
-  property.images.attach(io: File.open("db/images/property_9.png"), filename: property.name)
-  property.images.attach(io: File.open("db/images/property_10.png"), filename: property.name)
-  property.images.attach(io: File.open("db/images/property_11.png"), filename: property.name)
-  property.images.attach(io: File.open("db/images/property_12.png"), filename: property.name)
+  property.images.attach(io: File.open("db/images/property_#{i + 1}.png"), filename: "property_#{i + 1}.png")
+  property.images.attach(io: File.open("db/images/property_7.png"), filename: "property_7.png")
+  property.images.attach(io: File.open("db/images/property_8.png"), filename: "property_8.png")
+  property.images.attach(io: File.open("db/images/property_9.png"), filename: "property_9.png")
+  property.images.attach(io: File.open("db/images/property_10.png"), filename: "property_10.png")
+  property.images.attach(io: File.open("db/images/property_11.png"), filename: "property_11.png")
+  property.images.attach(io: File.open("db/images/property_12.png"), filename: "property_12.png")
 
   ((5..10).to_a.sample).times do
     Review.create!({
@@ -47,7 +78,7 @@ DESCRIPTION
       location_rating: (1..5).to_a.sample,
       value_rating: (1..5).to_a.sample,
       property: property,
-      user: user
+      user: User.all.sample
     })
   end
 end
