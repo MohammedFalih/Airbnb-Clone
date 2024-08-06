@@ -1,34 +1,95 @@
 import { Controller } from "@hotwired/stimulus"
+import flatpickr from "flatpickr";
 
 export default class extends Controller {
+    static targets = ["baseFare", "checkin", "checkout", "numberOfNights", "serviceFee", "totalAmount"]
 
-    static targets = ["baseFare", "numberOfNights", "serviceFee", "totalAmount"]
-    SERVICE_FEE = 0.18;
+    SERVICE_FEE_PERCENTAGE = 0.18;
+
+    disableDates = [];
 
     connect() {
+        this.formatBlockedDates();
+
+        flatpickr(this.checkinTarget, {
+            minDate: new Date().fp_incr(1),
+            disable: this.disableDates,
+            onChange: (selectedDates, dateStr, instance) => {
+                this.triggerCheckoutDatePicker(selectedDates);
+            },
+        });
+
         this.updateDetails();
     }
 
+    triggerCheckoutDatePicker(selectedDates) {
+        flatpickr(this.checkoutTarget, {
+            minDate: new Date(selectedDates).fp_incr(1),
+            disable: this.disableDates,
+            onChange: (selectedDates, dateStr, instance) => {
+                this.updateDetails();
+            },
+        });
+
+        this.checkoutTarget.click();
+    }
+
+    formatBlockedDates() {
+        const blockedDates = JSON.parse(this.element.dataset.blockedDates)
+        for (let i = 0; i < blockedDates.length; i++) {
+            const dates = blockedDates[i];
+            this.disableDates.push(
+                {
+                    from: dates[0], // checkin-date
+                    to: dates[1], // checkout-date
+                }
+            )
+        }
+    }
+
     updateDetails() {
-        this.baseFareTarget.textContent = this.calculateBaseFare.toFixed(2);
-        this.numberOfNightsTarget.textContent = this.numberOfNights;
-        this.serviceFeeTarget.textContent = this.calculateServiceFee.toFixed(2);
-        this.totalAmountTarget.textContent = this.calculateTotalAmount.toFixed(2);
+        const nightsCount = this.numberOfNights;
+        const baseFair = this.calculateBaseFare(nightsCount);
+        const serviceFee = this.calculateServiceFee(baseFair);
+        const totalAmount = this.calculateTotalAmount(baseFair, serviceFee);
+
+        this.numberOfNightsTarget.textContent = nightsCount;
+        this.baseFareTarget.textContent = baseFair;
+        this.serviceFeeTarget.textContent = serviceFee;
+        this.totalAmountTarget.textContent = totalAmount;
     }
 
     get numberOfNights() {
-        return 10;
+        const checkinDate = new Date(this.checkinTarget.value);
+        const checkoutDate = new Date(this.checkoutTarget.value);
+        return (checkoutDate - checkinDate) / (1000 * 60 * 60 * 24);
     }
 
-    get calculateBaseFare() {
-        return this.numberOfNights * parseFloat(this.element.dataset.perNightPrice);
+    calculateBaseFare(nightsCount) {
+        return parseFloat((nightsCount * this.element.dataset.perNightPrice).toFixed(2));
     }
 
-    get calculateServiceFee() {
-        return this.calculateBaseFare * this.SERVICE_FEE;
+    calculateServiceFee(baseFair) {
+        return parseFloat((baseFair * this.SERVICE_FEE_PERCENTAGE).toFixed(2));
     }
 
-    get calculateTotalAmount() {
-        return this.calculateBaseFare + this.calculateServiceFee;
+    calculateTotalAmount(baseFair, serviceFee) {
+        return parseFloat((baseFair + serviceFee).toFixed(2));
+    }
+
+    reserveProperty(e) {
+
+        const paramsData = {
+            checkin_date: "15-03-2024",
+            checkout_date: "15-06-2024"
+        }
+
+        const paramsURL = (new URLSearchParams(paramsData)).toString();
+
+        e.preventDefault();
+
+        const baseUrl = e.target.dataset.reservePropertyUrl;
+
+        Turbo.visit(`${baseUrl}?${paramsURL}`)
     }
 }

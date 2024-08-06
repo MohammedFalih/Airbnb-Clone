@@ -1,10 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
-import {toggle} from 'el-transition'
+import { toggle } from 'el-transition'
 
 export default class extends Controller {
-    connect() {
-        console.log("connected");
-    }
+    connect() { }
     toggleModal() {
         const modalTriggerId = this.element.dataset.modalTriggerId;
         console.log("modalTriggerId: ", modalTriggerId)
