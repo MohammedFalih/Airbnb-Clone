@@ -48,6 +48,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "dotenv"
 end
 
 gem "net-pop", "~> 0.1.0"
@@ -61,3 +62,5 @@ gem "devise", "~> 4.9"
 gem "faker", "~> 3.4"
 
 gem "money-rails", "~> 1.15"
+
+gem "stripe-rails"

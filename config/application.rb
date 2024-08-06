@@ -38,5 +38,7 @@ module Airbnb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.stripe.secret_key = ENV["STRIPE_SECRET_KEY"]
+    config.stripe.publishable_key = ENV["STRIPE_PUBLISH_KEY"]
   end
 end
