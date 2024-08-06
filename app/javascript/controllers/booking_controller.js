@@ -10,25 +10,25 @@ export default class extends Controller {
     }
 
     updateDetails() {
-        this.baseFareTarget.textContent = this.calculateBaseFare();
-        this.numberOfNightsTarget.textContent = this.numberOfNights();
-        this.serviceFeeTarget.textContent = this.calculateServiceFee();
-        this.totalAmountTarget.textContent = this.calculateTotalAmount()
+        this.baseFareTarget.textContent = this.calculateBaseFare.toFixed(2);
+        this.numberOfNightsTarget.textContent = this.numberOfNights;
+        this.serviceFeeTarget.textContent = this.calculateServiceFee.toFixed(2);
+        this.totalAmountTarget.textContent = this.calculateTotalAmount.toFixed(2);
     }
 
-    numberOfNights() {
+    get numberOfNights() {
         return 10;
     }
 
-    calculateBaseFare() {
-        return parseFloat((this.numberOfNights() * this.element.dataset.perNightPrice).toFixed(2));
+    get calculateBaseFare() {
+        return this.numberOfNights * parseFloat(this.element.dataset.perNightPrice);
     }
 
-    calculateServiceFee() {
-        return parseFloat((this.calculateBaseFare() * this.SERVICE_FEE).toFixed(2));
+    get calculateServiceFee() {
+        return this.calculateBaseFare * this.SERVICE_FEE;
     }
 
-    calculateTotalAmount() {
-        return parseFloat((this.calculateBaseFare() + this.calculateServiceFee()).toFixed(2))
+    get calculateTotalAmount() {
+        return this.calculateBaseFare + this.calculateServiceFee;
     }
 }
