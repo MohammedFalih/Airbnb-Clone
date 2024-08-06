@@ -80,8 +80,8 @@ export default class extends Controller {
     reserveProperty(e) {
 
         const paramsData = {
-            checkin_date: "15-03-2024",
-            checkout_date: "15-06-2024"
+            checkin_date: this.checkinTarget.value,
+            checkout_date: this.checkoutTarget.value,
         }
 
         const paramsURL = (new URLSearchParams(paramsData)).toString();
