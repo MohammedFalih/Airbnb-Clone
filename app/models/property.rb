@@ -13,6 +13,8 @@ class Property < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
 
+  has_many :payments, through: :reservations, dependent: :destroy
+
   has_many :wishlists, dependent: :destroy
   has_many :wishlisted_users, through: :wishlists, source: :user, dependent: :destroy
 
