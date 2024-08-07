@@ -5,14 +5,16 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :api do
-    resources :wishlists, only: [:create, :destroy]
+    resources :wishlists, only: [ :create, :destroy ]
   end
 
-  resources :properties, only: [:show] do
-    resources :bookings, only: [:new]
+  resources :properties, only: [ :show ] do
+    resources :bookings, only: [ :new ]
   end
 
-  resources :booking_payments, only: [:create]
+  resources :booking_payments, only: [ :create ]
+
+  resources :wishlists, only: [ :index ]
 
   get "booking_payments/success", to: "booking_payments#success"
 

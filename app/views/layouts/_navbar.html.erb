@@ -65,7 +65,7 @@
             <!-- Active: "bg-gray-100", Not Active: "" -->
             <% if user_signed_in? %>
               <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'block px-4 py-2 text-sm text-gray-700', role:"menuitem", tabindex:"-1" %>
-              <%= link_to 'Wishlist', '/', class: 'block px-4 py-2 text-sm text-gray-700', role: "menuitem", tabindex: "-1" %>
+              <%= link_to 'Wishlist', wishlists_path, class: 'block px-4 py-2 text-sm text-gray-700', role: "menuitem", tabindex: "-1" %>
             <% else %>
               <%= link_to 'Login', new_user_session_path, class: 'js-login block px-4 py-2 text-sm text-gray-700',role:"menuitem", tabindex:"-1" %>
               <%= link_to 'Signup', new_user_registration_path, class: 'block px-4 py-2 text-sm text-gray-700',role:"menuitem", tabindex:"-1" %>

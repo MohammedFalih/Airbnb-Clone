@@ -6,8 +6,8 @@ class BookingPaymentsController < ApplicationController
       currency: "usd",
       unit_amount: Money.from_amount(BigDecimal(booking_payments_params[:total_amount])).cents,
       product_data: {
-        name: @property.name,
-      },
+        name: @property.name
+      }
     })
 
     success_url = url_for(controller: "booking_payments", action: "success", only_path: false, booking_params: booking_payments_params.except(:stripeToken))
@@ -16,10 +16,10 @@ class BookingPaymentsController < ApplicationController
       line_items: [
         {
           price: stripe_price.id,
-          quantity: 1,
-        },
+          quantity: 1
+        }
       ],
-      mode: "payment",
+      mode: "payment"
     })
 
     redirect_to stripe_session.url, allow_other_host: true, status: 303
@@ -32,14 +32,14 @@ class BookingPaymentsController < ApplicationController
       user_id: current_user.id,
       property_id: booking_params[:property_id],
       checkin_date: booking_params[:checkin_date],
-      checkout_date: booking_params[:checkout_date],
+      checkout_date: booking_params[:checkout_date]
     })
 
     payment = Payment.create!({
       reservation_id: reservation.id,
       base_fare: Money.from_amount(BigDecimal(booking_params[:base_fare])).cents,
       service_fee: Money.from_amount(BigDecimal(booking_params[:service_fee])).cents,
-      total_amount: Money.from_amount(BigDecimal(booking_params[:total_amount])).cents,
+      total_amount: Money.from_amount(BigDecimal(booking_params[:total_amount])).cents
     })
 
     redirect_to root_path
