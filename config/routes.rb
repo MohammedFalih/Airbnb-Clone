@@ -16,6 +16,10 @@ Rails.application.routes.draw do
 
   resources :wishlists, only: [ :index ]
 
+  resources :profiles, only: [ :show ]
+
+  resources :reservations, only: [ :show ]
+
   get "booking_payments/success", to: "booking_payments#success"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
