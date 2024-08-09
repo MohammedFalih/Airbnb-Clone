@@ -26,7 +26,7 @@ class User < ApplicationRecord
       address_2: Faker::Address.street_name,
       city: Faker::Address.city,
       state: Faker::Address.state,
-      country: Faker::Address.country,
+      country_code: Faker::Address.country_code,
     )
     profile.picture.attach(
       io: URI.parse(Faker::LoremFlickr.image).open,

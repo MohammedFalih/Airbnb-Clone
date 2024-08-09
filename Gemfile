@@ -64,3 +64,5 @@ gem "faker", "~> 3.4"
 gem "money-rails", "~> 1.15"
 
 gem "stripe-rails"
+
+gem "country_select", "~> 8.0"
