@@ -1,4 +1,5 @@
 require "open-uri"
+
 description = <<-DESCRIPTION
 <div>Explore the nature and art oasis at our unique property. The living room, a cozy masterpiece, and the fully equipped kitchen are ideal for cooking and entertaining. Step outside to our garden patio, unwind, and enjoy morning birdsong. Tastefully decorated bedrooms, a powder room, and utility area complete the experience.<br />Note: The property is surrounded by a residential area. Despite initial surroundings, I am sure that, stepping in will fill your mood with joy and happiness.
 </div>
@@ -64,8 +65,7 @@ user = User.create!({
   password: "123456"
 })
 
-# Create the profile for the first user
-profile = user.profile # Get the profile for the user
+profile = user.profile
 profile.picture.attach(io: pictures[0], filename: "#{profile.name}.jpg") if profile
 
 19.times do |i|
@@ -76,7 +76,6 @@ profile.picture.attach(io: pictures[0], filename: "#{profile.name}.jpg") if prof
     }
   )
 
-  # Create a profile for each new user
   random_profile = random_user.profile
   random_profile.picture.attach(io: pictures[i + 1], filename: "#{random_profile.name}.jpg") if random_profile
 end

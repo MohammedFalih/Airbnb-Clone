@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  require "open-uri"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,13 +20,17 @@ class User < ApplicationRecord
   after_create :new_profile
 
   def new_profile
-    self.create_profile!(
+    profile = self.create_profile!(
       name: Faker::Lorem.unique.sentence(word_count: 3),
       address_1: Faker::Address.street_address,
       address_2: Faker::Address.street_name,
       city: Faker::Address.city,
       state: Faker::Address.state,
       country: Faker::Address.country,
+    )
+    profile.picture.attach(
+      io: URI.parse(Faker::LoremFlickr.image).open,
+      filename: "#{profile.name}.jpg",
     )
   end
 end

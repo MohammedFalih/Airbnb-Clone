@@ -1,9 +1,10 @@
 class ReviewsController < ApplicationController
- before_action :set_reservation, only: [ :create, :new ]
+  before_action :set_reservation, only: [ :create, :new ]
 
   def create
     @review = current_user.reviews.new(review_params.merge(
-      property_id: @reservation.property_id
+      property_id: @reservation.property_id,
+      reservation_id: @reservation.id,
     ))
 
     if @review.save
@@ -21,7 +22,6 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.permit(
-      :user_id,
       :content,
       :cleanliness_rating,
       :accuracy_rating,
