@@ -196,4 +196,6 @@
     </div>
   </section>
 </div>
-<%= render 'shared/modal', modalTriggerId: "reviews", content: 'properties/reviews_modal', content_params: {property: property} %>
+<% if property.reviews_count.present? && property.reviews_count > 0 %>
+  <%= render 'shared/modal', modalTriggerId: "reviews", content: 'properties/reviews_modal', content_params: {property: property} %>
+<% end %>
