@@ -34,8 +34,8 @@ class Property < ApplicationRecord
     reviews.average(:accuracy_rating)
   end
 
-  def average_checkin_rating
-    reviews.average(:check_in_rating)
+  def average_check_in_rating
+    reviews.average(:checkin_rating)
   end
 
   def average_communication_rating

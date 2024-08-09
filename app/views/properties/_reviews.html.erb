@@ -28,7 +28,7 @@
         >
           <path fill-rule="evenodd" d="m15.1 1.58-4.13 8.88-9.86 1.27a1 1 0 0 0-.54 1.74l7.3 6.57-1.97 9.85a1 1 0 0 0 1.48 1.06l8.62-5 8.63 5a1 1 0 0 0 1.48-1.06l-1.97-9.85 7.3-6.57a1 1 0 0 0-.55-1.73l-9.86-1.28-4.12-8.88a1 1 0 0 0-1.82 0z"></path>
         </svg>
-        <span><%= (property.average_final_rating).round(1) %> · <%= property.reviews_count %> reviews</span>
+        <span><%= (property.average_final_rating).round(2) %> · <%= property.reviews_count %> reviews</span>
       </div>
       <!-- Review category stats -->
       <div class="grid-cols-7 gap-4 mt-8 divide-x hidden lg:grid">
@@ -83,7 +83,7 @@
         </div>
         <div class="ps-2 sm:ps-4 lg:ps-6 ">
           <h4 class="text-sm font-medium">Check-in</h4>
-          <p class="text-lg font-medium"><%= property.average_checkin_rating().round(1) %></p>
+          <p class="text-lg font-medium"><%= property.average_check_in_rating().round(1) %></p>
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 32 32" 
@@ -144,10 +144,24 @@
   <section aria-labelledby="reviews-items" class="border-t border-gray-200 pt-10 lg:pt-16">
     <div class="space-y-10">
       <div class="lg:grid lg:grid-cols-2 lg:gap-16 space-y-8 lg:space-y-0">
+        <%# TODO: Show latest reviews first. Apply this for other models also. %>
         <% property.reviews.limit(6).each do |review| %>
           <div class="flex flex-col">
             <div class="flex items-center">
-              <%= image_tag review.user.profile.picture, alt: review.user.profile.name, class:"h-12 w-12 rounded-full" %>
+              <% if review.user.profile.picture.present? %>
+                <%= image_tag review.user.profile.picture, alt: review.user.profile.name, class:"h-12 w-12 rounded-full" %>
+              <% else %>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke-width="1.5" 
+                  stroke="currentColor" 
+                  class="h-12 w-12 rounded-full"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+              <% end %>
               <div>
                 <p class="text-base text-gray-900 ms-4"><%= review.user.profile.name %></p>
                 <p class="text-xs text-gray-900 ms-4"><%= review.user.profile.city %>, <%= review.user.profile.country %></p>

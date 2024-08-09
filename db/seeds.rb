@@ -47,7 +47,7 @@ amenities_data = [
   { name: "Smoke alarm", icon: "smoke_alarm.svg" },
   { name: "TV", icon: "tv.svg" },
   { name: "Washing machine", icon: "washing_machine.svg" },
-  { name: "Wifi", icon: "wifi.svg" },
+  { name: "Wifi", icon: "wifi.svg" }
 ]
 
 amenities_data.each do |data|
@@ -61,7 +61,7 @@ end
 
 user = User.create!({
   email: "test1@gmail.com",
-  password: "123456",
+  password: "123456"
 })
 
 # Create the profile for the first user
@@ -72,7 +72,7 @@ profile.picture.attach(io: pictures[0], filename: "#{profile.name}.jpg") if prof
   random_user = User.create!(
     {
       email: "test#{i + 2}@gmail.com",
-      password: "123456",
+      password: "123456"
     }
   )
 
@@ -95,7 +95,7 @@ end
     bedroom_count: (2..5).to_a.sample,
     bed_count: (4..10).to_a.sample,
     guest_count: (4..20).to_a.sample,
-    bathroom_count: (1..4).to_a.sample,
+    bathroom_count: (1..4).to_a.sample
   })
 
   property.images.attach(io: File.open("db/images/property_#{i + 1}.png"), filename: property.name)
@@ -120,12 +120,12 @@ end
       content: Faker::Lorem.paragraph(sentence_count: 10),
       cleanliness_rating: (1..5).to_a.sample,
       accuracy_rating: (1..5).to_a.sample,
-      check_in_rating: (1..5).to_a.sample,
+      checkin_rating: (1..5).to_a.sample,
       communication_rating: (1..5).to_a.sample,
       location_rating: (1..5).to_a.sample,
       value_rating: (1..5).to_a.sample,
       property: property,
-      user: User.all.sample,
+      user: User.all.sample
     })
   end
 end
