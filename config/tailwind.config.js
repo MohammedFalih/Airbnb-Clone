@@ -16,6 +16,7 @@ module.exports = {
       primary: {
         DEFAULT: '#FF5A5F',
         dark: '#FF385C',
+        blueclr: '#0284c7'
       }
     },
     extend: {
