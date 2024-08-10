@@ -15,11 +15,11 @@
     <%= stripe_javascript_tag %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <% if controller_name != 'registrations' && controller_name != 'sessions' %>
       <%= render 'layouts/navbar' %>
     <% end %>
+    <%= render 'shared/notice' %>
+    <%= render 'shared/alert' %>
     <%= yield %>
   </body>
 </html>
