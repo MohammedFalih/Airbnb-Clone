@@ -35,9 +35,9 @@
           <% end %>
         </button>
       </div>
-      <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
+      <div class="hidden lg:relative z-20 lg:z-10 lg:ml-4 lg:flex lg:items-center">
         <!-- Profile dropdown -->
-        <div class="relative ml-4 flex-shrink-0">
+        <div class="relative ml-4 z-100 flex-shrink-0">
           <div>
             <button data-header-target="openUserMenu" type="button" class="relative flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
               <span class="absolute -inset-1.5"></span>
@@ -58,7 +58,7 @@
               <% end %>
             </button>
           </div>
-          <div data-header-target = "dropDown" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" 
+          <div data-header-target = "dropDown" class="hidden absolute right-0 z-20 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" 
             data-transition-enter="transition ease-out duration-100"
             data-transition-enter-start="transform opacity-0 scale-95"
             data-transition-enter-end="transform opacity-100 scale-100"
@@ -69,6 +69,7 @@
             <!-- Active: "bg-gray-100", Not Active: "" -->
             <% if user_signed_in? %>
               <%= link_to 'My Account', edit_profile_path, class: 'block px-4 py-2 text-sm text-gray-700', role:"menuitem", tabindex:"-1" %>
+              <%= link_to 'Dashboard', owner_dashboard_index_path, class: 'block px-4 py-2 text-sm text-gray-700', role:"menuitem", tabindex:"-1" %>
               <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'block px-4 py-2 text-sm text-gray-700', role:"menuitem", tabindex:"-1" %>
               <%= link_to 'Wishlist', wishlists_path, class: 'block px-4 py-2 text-sm text-gray-700', role: "menuitem", tabindex: "-1" %>
             <% else %>
