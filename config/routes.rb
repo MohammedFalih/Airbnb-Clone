@@ -26,7 +26,12 @@ Rails.application.routes.draw do
 
   namespace :owner do
     resources :dashboard, only: [ :index ]
-    resources :properties
+    resources :properties do
+      member do
+        patch :update_amenities
+        delete :remove_image
+      end
+    end
     resources :reservations, only: [ :index ]
   end
 
