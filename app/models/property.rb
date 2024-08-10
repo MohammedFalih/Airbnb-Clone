@@ -1,11 +1,11 @@
 class Property < ApplicationRecord
-  validates :name, presence: true
-  validates :headline, presence: true
-  validates :description, presence: true
-  validates :address_1, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :country_code, presence: true
+  validates :name, presence: :true
+  validates :headline, presence: :true
+  validates :description, presence: :true
+  validates :address_1, presence: :true
+  validates :city, presence: :true
+  validates :state, presence: :true
+  validates :country_code, presence: :true
 
   monetize :price_cents, allow_nil: true
 
@@ -13,7 +13,8 @@ class Property < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
 
-  has_many :payments, through: :reservations, dependent: :destroy
+  has_many :property_amenities, dependent: :destroy
+  has_many :amenities, through: :property_amenities, source: :amenity, dependent: :destroy
 
   has_many :wishlists, dependent: :destroy
   has_many :wishlisted_users, through: :wishlists, source: :user, dependent: :destroy
@@ -21,10 +22,14 @@ class Property < ApplicationRecord
   has_many :reservations, dependent: :destroy
   has_many :reserved_users, through: :reservations, source: :user, dependent: :destroy
 
-  has_many :property_amenities, dependent: :destroy
-  has_many :amenities, through: :property_amenities, source: :amenity, dependent: :destroy
+  has_many :payments, through: :reservations, dependent: :destroy
 
   has_rich_text :description
+
+  def update_average_rating
+    average_rating = reviews.average(:final_rating)
+    update_column(:average_final_rating, average_rating)
+  end
 
   def average_cleanliness_rating
     reviews.average(:cleanliness_rating)
@@ -34,7 +39,7 @@ class Property < ApplicationRecord
     reviews.average(:accuracy_rating)
   end
 
-  def average_check_in_rating
+  def average_checkin_rating
     reviews.average(:checkin_rating)
   end
 
@@ -48,11 +53,6 @@ class Property < ApplicationRecord
 
   def average_value_rating
     reviews.average(:value_rating)
-  end
-
-  def set_average_rating
-    average_rating = reviews.average(:final_rating)
-    update_column(:average_final_rating, average_rating)
   end
 
   def wishlisted_by?(user = nil)
