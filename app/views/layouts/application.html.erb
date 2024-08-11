@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <%= stripe_javascript_tag %>
+    <% if controller_name == "booking_property" && action == "create" %>
+      <%= stripe_javascript_tag %>
+    <% end %>
   </head>
   <body>
     <% if controller_name != 'registrations' && controller_name != 'sessions' %>
