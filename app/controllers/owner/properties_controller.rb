@@ -1,7 +1,7 @@
 module Owner
   class PropertiesController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_property, only: [:edit, :update, :update_amenities, :add_images, :remove_image, :destroy]
+    before_action :set_property, only: [ :edit, :update, :update_amenities, :add_images, :remove_image, :destroy ]
 
     def index
       @properties = current_user.properties
@@ -68,6 +68,10 @@ module Owner
         :price,
         :headline,
         :description,
+        :guest_count,
+        :bedroom_count,
+        :bed_count,
+        :bathroom_count,
         :address_1,
         :address_2,
         :city,
