@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [ :new, :create ]
   end
 
+  get "/search", to: "search#index"
+
   namespace :owner do
     resources :properties do
       member do

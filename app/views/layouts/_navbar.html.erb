@@ -30,26 +30,17 @@
         <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open menu</span>
-          <!--
-            Icon when menu is closed.
 
-            Menu open: "hidden", Menu closed: "block"
-          -->
           <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <!--
-            Icon when menu is open.
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
+      
           <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
       <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
-        <!-- Profile dropdown -->
         <div class="relative ml-4 flex-shrink-0">
           <div>
             <button data-header-target="openUserMenu" type="button" class="relative flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
@@ -72,7 +63,7 @@
             </button>
           </div>
           <div
-            data-header-target="dropdown" 
+            data-header-target="dropDown" 
             data-transition-enter="transition ease-out duration-100"
             data-transition-enter-start="transform opacity-0 scale-95"
             data-transition-enter-end="transform opacity-100 scale-100"
@@ -85,7 +76,6 @@
             aria-labelledby="user-menu-button" 
             tabindex="-1"
           >
-            <!-- Active: "bg-gray-100", Not Active: "" -->
             <% if user_signed_in? %>
               <%= link_to "Account", edit_profile_path , class:"block px-4 py-2 text-sm text-gray-700", role:"menuitem", tabindex:"-1" %>
               <%= link_to "Dashboard", owner_reservations_path, class:"block px-4 py-2 text-sm text-gray-700", role:"menuitem", tabindex:"-1" %>
@@ -100,7 +90,6 @@
       </div>
     </div>
   </div>
-  <!-- Mobile menu, show/hide based on menu state. -->
   <nav class="lg:hidden" aria-label="Global" id="mobile-menu">
     <div class="border-t border-gray-200 pb-3 pt-4">
       <div class="flex items-center px-4">

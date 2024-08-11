@@ -14,9 +14,3 @@ export default class extends Controller {
 function openDropdown(element) {
   toggle(element)
 }
-
-// function closeDropdown() {
-//   leave(this.dropdownTarget).then(() => {
-//     element.destroy();
-//   })
-// }

@@ -22,6 +22,6 @@ class BookingsController < ApplicationController
   end
 
   def bookingsParam
-    params.require(:booking).permit(:property_id, :checkin_date, :checkout_date)
+    uire(:booking).permit(:property_id, :checkin_date, :checkout_date)
   end
 end
