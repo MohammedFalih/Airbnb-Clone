@@ -65,4 +65,4 @@ gem "money-rails", "~> 1.15"
 
 gem "stripe-rails"
 
-gem "country_select", "~> 8.0"
+gem "country_select", "~> 9.0"
