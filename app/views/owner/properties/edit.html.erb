@@ -28,6 +28,22 @@
       </div>
     </div>
     <%= render 'owner/properties/form', path: owner_property_path %>
+    <div class="px-8 py-8 border rounded-md lg:flex-auto my-8" data-controller="map">
+      <div>
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Google Location</h2>
+        <%# TODO: Set initial location by passing the coordinates to js controller. %>
+        <%= form_with model: @property, url: update_location_owner_property_path, class:'mt-6' do |f| %>
+          <div class="mt-6">
+            <div id="map" class="rounded-md h-80"></div>
+            <%= f.hidden_field :latitude, data: {"map-target": 'latitude'} %>
+            <%= f.hidden_field :longitude, data: {"map-target": 'longitude'} %>
+          </div>
+          <div class="col-span-full">
+            <%= f.submit "Save", class:"cursor-pointer mt-2 flex items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
     <div class="px-8 py-8 border rounded-md lg:flex-auto my-8">
       <div>
         <h2 class="text-base font-semibold leading-7 text-gray-900">Amenities</h2>
@@ -55,3 +71,7 @@
     </div>
   </main>
 </div>
+<script>
+  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+      ({key: "AIzaSyD2ebuacUFpGhBftfv4_H2z_9wVucrN7Ns", v: "weekly"});
+</script>

@@ -1,7 +1,7 @@
 module Owner
   class PropertiesController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_property, only: [ :edit, :update, :update_amenities, :add_images, :remove_image, :destroy ]
+    before_action :set_property, only: [ :edit, :update, :update_amenities, :update_location, :add_images, :remove_image, :destroy ]
 
     def index
       @properties = current_user.properties.order(created_at: :desc)
@@ -38,6 +38,14 @@ module Owner
       end
     end
 
+    def update_location
+      if @property.update!(location_params)
+        redirect_to edit_owner_property_path, notice: "Location updated successfully"
+      else
+        redirect_back fallback_location: edit_owner_property_path, alert: "Failed to update location"
+      end
+    end
+
     def add_images
       @property.images.attach(params[:property][:images])
       redirect_to edit_owner_property_path, notice: "Image added successfully"
@@ -56,6 +64,10 @@ module Owner
 
     def set_property
       @property = current_user.properties.find(params[:id])
+    end
+
+    def location_params
+      params.require(:property).permit(:latitude, :longitude)
     end
 
     def amenities_params
