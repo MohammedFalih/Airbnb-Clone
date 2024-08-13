@@ -40,8 +40,8 @@ export default class extends Controller {
             const dates = blockedDates[i];
             this.disableDates.push(
                 {
-                    from: dates[0], // checkin-date
-                    to: dates[1], // checkout-date
+                    from: dates[0], 
+                    to: dates[1],
                 }
             )
         }
